@@ -33,9 +33,7 @@ namespace Potter.Core.Services
 
                 if(distinctItems.Count() == discount.Quantity)
                 {
-                    var discountPrice = 0;
-                     
-                    //totalPrice *= discount.DiscountedPercentage;
+                    totalPrice *= discount.DiscountedPercentage;
                 }
             }
 
