@@ -1,0 +1,12 @@
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.csprojAssemblyReference.cache
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.AssemblyInfoInputs.cache
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.AssemblyInfo.cs
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.csproj.CoreCompileInputs.cache
+C:\Development\PotterKata\Potter.Core\bin\Debug\netcoreapp3.1\Potter.Core.deps.json
+C:\Development\PotterKata\Potter.Core\bin\Debug\netcoreapp3.1\Potter.Core.dll
+C:\Development\PotterKata\Potter.Core\bin\Debug\netcoreapp3.1\Potter.Core.pdb
+C:\Development\PotterKata\Potter.Core\bin\Debug\netcoreapp3.1\Potter.Domain.dll
+C:\Development\PotterKata\Potter.Core\bin\Debug\netcoreapp3.1\Potter.Domain.pdb
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.csproj.CopyComplete
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.dll
+C:\Development\PotterKata\Potter.Core\obj\Debug\netcoreapp3.1\Potter.Core.pdb

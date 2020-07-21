@@ -1,0 +1,9 @@
+C:\Development\PotterKata\Potter.Domain\bin\Debug\netcoreapp3.1\Potter.Domain.deps.json
+C:\Development\PotterKata\Potter.Domain\bin\Debug\netcoreapp3.1\Potter.Domain.dll
+C:\Development\PotterKata\Potter.Domain\bin\Debug\netcoreapp3.1\Potter.Domain.pdb
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.csprojAssemblyReference.cache
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.AssemblyInfoInputs.cache
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.AssemblyInfo.cs
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.csproj.CoreCompileInputs.cache
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.dll
+C:\Development\PotterKata\Potter.Domain\obj\Debug\netcoreapp3.1\Potter.Domain.pdb
