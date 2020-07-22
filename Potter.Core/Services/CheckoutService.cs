@@ -1,43 +1,64 @@
 ﻿using Potter.Domain.Interfaces;
 using Potter.Domain.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace Potter.Core.Services
 {
     public class CheckoutService : ICheckoutService
     {
-
-        public IDictionary<int, decimal> Prices { get; private set; }
+        private readonly decimal _pricePerBook;
         public IList<IDiscount> Discounts { get; private set; }
 
-        public CheckoutService(IDictionary<int, decimal> prices, IList<IDiscount> discounts)
+        public CheckoutService(decimal pricePerBook, IList<IDiscount> discounts)
         {
-            Prices = prices;
+            _pricePerBook = pricePerBook;
             Discounts = discounts;
         }
 
         public decimal CalculateTotal(ShoppingCart cart)
         {
             decimal totalPrice = 0;
+            var itemsLeft = cart.Items.Count();
 
-            foreach (var item in cart.Items)
+            var bookSets = GetBookSets(cart.Items);
+
+            foreach (var set in bookSets)
             {
-                totalPrice += Prices[item];
-            }
-
-            foreach (var discount in Discounts)
-            {
-                var distinctItems = cart.Items.Distinct();
-
-                if(distinctItems.Count() == discount.Quantity)
+                var discount = Discounts.FirstOrDefault(d => d.Quantity == set.Count());
+                if (discount != null)
                 {
-                    totalPrice *= discount.DiscountedPercentage;
+                    itemsLeft -= discount.Quantity;
+                    totalPrice += (discount.Quantity * _pricePerBook) * discount.DiscountedPercentage;
+                }
+                else
+                {
+                    totalPrice += _pricePerBook;
                 }
             }
 
             return totalPrice;
+        }
+
+        private List<List<int>> GetBookSets(IEnumerable<int> books)
+        {
+            var bookSets = new List<List<int>>() { new List<int>() };
+
+            foreach (var bookNo in books)
+            {
+                var set = bookSets.FirstOrDefault(x => !x.Contains(bookNo));
+
+                if (set != null)
+                {
+                    set.Add(bookNo);
+                }
+                else
+                {
+                    bookSets.Add(new List<int>() { bookNo });
+                }
+            }
+
+            return bookSets;
         }
     }
 }
