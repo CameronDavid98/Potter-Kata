@@ -7,7 +7,6 @@ namespace Potter.Domain.Interfaces
 {
     public interface ICheckoutService
     {
-        IList<IDiscount> Discounts { get;  } 
         decimal CalculateTotal(ShoppingCart cart);
     }
 }

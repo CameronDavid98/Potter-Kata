@@ -9,16 +9,19 @@ namespace Potter.Core.Services
     public class CheckoutService : ICheckoutService
     {
         private readonly decimal _pricePerBook;
-        public IList<IDiscount> Discounts { get; private set; }
+        private readonly IList<IDiscount> _discounts;
 
         public CheckoutService(decimal pricePerBook, IList<IDiscount> discounts)
         {
             _pricePerBook = pricePerBook;
-            Discounts = discounts;
+            _discounts = discounts;
         }
 
         public decimal CalculateTotal(ShoppingCart cart)
         {
+            if (!cart.Items.Any())
+                return 0;
+
             decimal totalPrice = 0;
             var itemsLeft = cart.Items.Count();
 
@@ -26,7 +29,7 @@ namespace Potter.Core.Services
 
             foreach (var set in bookSets)
             {
-                var discount = Discounts.FirstOrDefault(d => d.Quantity == set.Count());
+                var discount = _discounts.FirstOrDefault(d => d.Quantity == set.Count());
                 if (discount != null)
                 {
                     itemsLeft -= discount.Quantity;

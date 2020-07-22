@@ -86,6 +86,25 @@ namespace Potter.Core.Tests.Services
         }
 
         [TestMethod]
+        public void Given4BooksItShouldApply2Discounts()
+        {
+            //Arrange
+            ICheckoutService checkout = new CheckoutService(_pricePerBook, _discounts);
+            var cart = new ShoppingCart()
+            {
+                Items = new[] { PotterBooks.FOURTH, PotterBooks.FOURTH, PotterBooks.FIFTH, PotterBooks.FIFTH}
+            };
+            var expectedResult = 30.4m;
+
+            //Act
+            var result = checkout.CalculateTotal(cart);
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+
+        }
+
+        [TestMethod]
         public void Given1BookItShouldReturnFullPrice()
         {
             //Arrange
@@ -203,6 +222,24 @@ namespace Potter.Core.Tests.Services
                 Items = new[] { PotterBooks.FIRST, PotterBooks.SECOND, PotterBooks.SECOND }
             };
             var expectedResult = 23.2m;
+
+            //Act
+            var result = checkout.CalculateTotal(cart);
+
+            //Assert
+            Assert.AreEqual(expectedResult, result);
+        }
+
+        [TestMethod]
+        public void Given0BooksItShouldReturn0()
+        {
+            //Arrange
+            ICheckoutService checkout = new CheckoutService(_pricePerBook, _discounts);
+            var cart = new ShoppingCart()
+            {
+                Items = new int[0]
+            };
+            var expectedResult = 0m;
 
             //Act
             var result = checkout.CalculateTotal(cart);
