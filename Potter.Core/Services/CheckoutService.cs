@@ -1,41 +1,43 @@
 ﻿using Potter.Domain.Interfaces;
 using Potter.Domain.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using Potter.Core.Extentions;
 
 namespace Potter.Core.Services
 {
     public class CheckoutService : ICheckoutService
     {
+        private readonly decimal _pricePerBook;
+        private readonly IList<IDiscount> _discounts;
 
-        public IDictionary<int, decimal> Prices { get; private set; }
-        public IList<IDiscount> Discounts { get; private set; }
-
-        public CheckoutService(IDictionary<int, decimal> prices, IList<IDiscount> discounts)
+        public CheckoutService(decimal pricePerBook, IList<IDiscount> discounts)
         {
-            Prices = prices;
-            Discounts = discounts;
+            _pricePerBook = pricePerBook;
+            _discounts = discounts;
         }
 
         public decimal CalculateTotal(ShoppingCart cart)
         {
+            if (!cart.Items.Any())
+                return 0;
+
             decimal totalPrice = 0;
+            var itemsLeft = cart.Items.Count();
 
-            foreach (var item in cart.Items)
+            var bookSets = cart.Items.DistinctSplit();
+
+            foreach (var set in bookSets)
             {
-                totalPrice += Prices[item];
-            }
-
-            foreach (var discount in Discounts)
-            {
-                var distinctItems = cart.Items.Distinct();
-
-                if(distinctItems.Count() == discount.Quantity)
+                var discount = _discounts.FirstOrDefault(d => d.Quantity == set.Count());
+                if (discount != null)
                 {
-                    var discountPrice = 0;
-                     
-                    //totalPrice *= discount.DiscountedPercentage;
+                    itemsLeft -= discount.Quantity;
+                    totalPrice += (discount.Quantity * _pricePerBook) * discount.DiscountedPercentage;
+                }
+                else
+                {
+                    totalPrice += _pricePerBook;
                 }
             }
 
