@@ -23,7 +23,6 @@ namespace Potter.Core.Services
                 return 0;
 
             decimal totalPrice = 0;
-            var itemsLeft = cart.Items.Count();
 
             var bookSets = cart.Items.DistinctSplit();
 
@@ -32,7 +31,6 @@ namespace Potter.Core.Services
                 var discount = _discounts.FirstOrDefault(d => d.Quantity == set.Count());
                 if (discount != null)
                 {
-                    itemsLeft -= discount.Quantity;
                     totalPrice += (discount.Quantity * _pricePerBook) * discount.DiscountedPercentage;
                 }
                 else
